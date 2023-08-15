@@ -12,7 +12,7 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 public class StudioRepositoryTest {
 
     @Autowired
-    private StudioRepository studioRepository;
+    public StudioRepository studioRepository;
 
     @Test
     public void testFindByRegistration() {

@@ -11,22 +11,10 @@ import java.util.List;
 public interface StudioRepository extends JpaRepository<Studios , Long> {
 
     List<Studios> findByName(String name);
-
     List<Studios> findByIsCommunity(int isCommunity); //isCommunity
-
     List<Studios> findByRegistration(boolean registration);
-
     List<Studios> findByVisibility(boolean visibility);
-
-
-   // List<Studios> findByUsersSet_Id(long userId); // id
-
     List<Studios>  findById(long userId);
-
-
-    //List<Studios> findByUsersSet_FirstName(String firstName); //uid
-
-
     //List User is registered by a particular Studio or not, param-Studio ID
 
     //Hang-On till we reach aggregator part
