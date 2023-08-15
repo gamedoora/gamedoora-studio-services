@@ -12,15 +12,20 @@ public interface StudioRepository extends JpaRepository<Studios , Long> {
 
     List<Studios> findByName(String name);
 
-    List<Studios> findByVisibility(boolean visibility);
-
-    List<Studios> findByCommunity(int community);
+    List<Studios> findByIsCommunity(int isCommunity); //isCommunity
 
     List<Studios> findByRegistration(boolean registration);
 
-    List<Studios> findByUsersSet_Id(long id);
+    List<Studios> findByVisibility(boolean visibility);
 
-    List<Studios> findByUsersSet_FirstName(String firstName);
+
+   // List<Studios> findByUsersSet_Id(long userId); // id
+
+    List<Studios>  findById(long userId);
+
+
+    //List<Studios> findByUsersSet_FirstName(String firstName); //uid
+
 
     //List User is registered by a particular Studio or not, param-Studio ID
 
