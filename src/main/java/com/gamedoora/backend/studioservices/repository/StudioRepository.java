@@ -14,7 +14,7 @@ public interface StudioRepository extends JpaRepository<Studios , Long> {
 
     List<Studios> findByVisibility(boolean visibility);
 
-    List<Studios> findByCommunity(int community);
+    List<Studios> findByIsCommunity(int community);
 
     List<Studios> findByRegistration(boolean registration);
 

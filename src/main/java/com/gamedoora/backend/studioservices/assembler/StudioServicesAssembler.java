@@ -100,7 +100,7 @@ public class StudioServicesAssembler {
     public List<StudiosDTO> getAllStudiosByCommunity(int community) {
         List<StudiosDTO> studiosDto = new ArrayList<>();
         if (community == 1) {
-            studioRepository.findByCommunity(community).forEach(studio -> studiosDto.add(getStudioMapper().studiosToStudiosDto(studio)));
+            studioRepository.findByIsCommunity(community).forEach(studio -> studiosDto.add(getStudioMapper().studiosToStudiosDto(studio)));
         } else {
             studioRepository.findAll().forEach(studio -> studiosDto.add(getStudioMapper().studiosToStudiosDto(studio)));
         }
