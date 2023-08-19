@@ -51,24 +51,16 @@ class repositoryTest {
 	public void testFindByIsCommunity() {
 		// Create some test studios with different is_community values
 		Studios studio1 = Studios.builder().id(1).name("A").isCommunity(1).description("DA").build();
-		Studios studio2 = Studios.builder().id(2).name("b").isCommunity(1).description("DA").visibility(false).build();
+		Studios studio2 = Studios.builder().id(2).name("b").isCommunity(2).description("DA").visibility(false).build();
 
 		List<Studios> list = List.of(studio1,studio2);
-
+		repo.saveAll(list);
 		// Perform the repository method call
-		List<Studios> communityStudios = list;
+		List<Studios> communityStudios = repo.findByIsCommunity(1);
+
+		assertEquals(1,communityStudios.size());
 
 
-
-		// Assert the results
-		assertEquals(2, communityStudios.size()); // Assuming 2 studios have is_community = 1
-
-		// Alternatively - individual
-		repo.save(studio1);
-		List<Studios> commu = repo.findByIsCommunity(1);
-		Assertions.assertEquals(1,commu.size());
-
-		// Alternative C
 
 	}
 
