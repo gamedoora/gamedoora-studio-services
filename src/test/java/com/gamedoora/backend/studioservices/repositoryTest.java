@@ -101,7 +101,7 @@ class repositoryTest {
 	// Below Shows detached state error for TestEntityManager.persist(_object_)
 
 //	@Test
-//	public void findByUsersSet_Id()
+//	public void findByUsersSet_Name()
 //	{
 //		Studios studio1 = Studios.builder().id(1).name("A").isCommunity(1).description("DA").build();
 //		Studios studio2 = Studios.builder().id(1).name("b").isCommunity(2).description("DA").visibility(false).build();
@@ -114,9 +114,9 @@ class repositoryTest {
 //		Users user1 = Users.builder().id(1).providerToken("").email("yo").build();
 //		entityManager.persist(user1);
 //
-//		List<Studios> com = repo.findByUsersSet_Id(1);
+//		List<Studios> com = repo.findByUsersSet_Name("A");
 //
-//		Assertions.assertEquals(2,com.size());
+//		Assertions.assertEquals(1,com.size());
 //
 //	}
 
