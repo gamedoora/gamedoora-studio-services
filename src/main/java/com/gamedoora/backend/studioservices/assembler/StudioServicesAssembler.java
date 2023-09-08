@@ -58,12 +58,12 @@ public class StudioServicesAssembler {
 
     public StudiosDTO updateStudio(long id , StudiosDTO studiosDto){
 
-        List<Studios> studiosRes = studioRepository.findById(id);
+        Optional<Studios> studiosRes = studioRepository.findById(id);
         if(studiosRes.isEmpty()){
             return null;
         }
-        Studios studioUpdate = studiosRes.get(0);// error temp fix
-        studioUpdate.setName(studiosRes.get(0).getName());
+        Studios studioUpdate = studiosRes.get();
+        studioUpdate.setName(studiosRes.get().getName());
         studioRepository.save(studioUpdate);
 
         return studiosDto;
@@ -100,7 +100,7 @@ public class StudioServicesAssembler {
     public List<StudiosDTO> getAllStudiosByCommunity(int community) {
         List<StudiosDTO> studiosDto = new ArrayList<>();
         if (community == 1) {
-            studioRepository.findByIsCommunity(community).forEach(studio -> studiosDto.add(getStudioMapper().studiosToStudiosDto(studio)));
+            studioRepository.findByCommunity(community).forEach(studio -> studiosDto.add(getStudioMapper().studiosToStudiosDto(studio)));
         } else {
             studioRepository.findAll().forEach(studio -> studiosDto.add(getStudioMapper().studiosToStudiosDto(studio)));
         }
@@ -119,7 +119,7 @@ public class StudioServicesAssembler {
 
     public List<StudiosDTO> getAllStudiosByUsers(long id){
         List<StudiosDTO> studiosDto = new ArrayList<>();
-        studioRepository.findById(id).forEach(studio -> studiosDto.add(getStudioMapper().studiosToStudiosDto(studio))); //id
+        studioRepository.findByUsersSet_Id(id).forEach(studio -> studiosDto.add(getStudioMapper().studiosToStudiosDto(studio)));
         if(studiosDto.isEmpty()) {
             studioRepository.findAll().forEach(studios -> studiosDto.add(getStudioMapper().studiosToStudiosDto(studios)));
         }
@@ -128,7 +128,7 @@ public class StudioServicesAssembler {
 
     public List<StudiosDTO> getAllStudiosByUsersFirstName(String name){
         List<StudiosDTO> studiosDto = new ArrayList<>();
-        studioRepository.findByName(name).forEach(studio -> studiosDto.add(getStudioMapper().studiosToStudiosDto(studio)));
+        studioRepository.findByUsersSet_FirstName(name).forEach(studio -> studiosDto.add(getStudioMapper().studiosToStudiosDto(studio)));
         if(studiosDto.isEmpty()) {
             studioRepository.findAll().forEach(studios -> studiosDto.add(getStudioMapper().studiosToStudiosDto(studios)));
         }
