@@ -134,4 +134,22 @@ public class StudioServicesAssembler {
         }
         return (studiosDto.isEmpty() ? null : studiosDto);
     }
+
+    public List<StudiosDTO> getAllStudiosByUsersLastName(String lastName){
+        List<StudiosDTO> studiosDto = new ArrayList<>();
+        studioRepository.findByUsersSet_LastName(lastName).forEach(studio -> studiosDto.add(getStudioMapper().studiosToStudiosDto(studio)));
+        if(studiosDto.isEmpty()) {
+            studioRepository.findAll().forEach(studios -> studiosDto.add(getStudioMapper().studiosToStudiosDto(studios)));
+        }
+        return (studiosDto.isEmpty() ? null : studiosDto);
+    }
+
+    public List<StudiosDTO> getAllStudiosByPhoneNumber(String phoneNumber){
+        List<StudiosDTO> studiosDto = new ArrayList<>();
+        studioRepository.findByUsersSet_PhoneNumber(phoneNumber).forEach(studio -> studiosDto.add(getStudioMapper().studiosToStudiosDto(studio)));
+        if(studiosDto.isEmpty()) {
+            studioRepository.findAll().forEach(studios -> studiosDto.add(getStudioMapper().studiosToStudiosDto(studios)));
+        }
+        return (studiosDto.isEmpty() ? null : studiosDto);
+    }
 }
