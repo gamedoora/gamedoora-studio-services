@@ -124,8 +124,8 @@ public class StudioServicesController extends BaseController{
     @GetMapping(
             value = "studio/users/{phoneNumber}",
             produces = {MediaType.APPLICATION_JSON_VALUE})
-    public ResponseEntity<List<StudiosDTO>> getAllStudiosByUsersPhoneNumber(@RequestParam(required = false) String user_phoneNumber){
-        return createResponse(studioServicesAssembler.getAllStudiosByUsersLastName(user_phoneNumber), HttpStatus.OK);
+    public ResponseEntity<List<StudiosDTO>> getAllStudiosByUsersPhoneNumber(@RequestParam(required = false) String userPhoneNumber){
+        return createResponse(studioServicesAssembler.getAllStudiosByPhoneNumber(userPhoneNumber), HttpStatus.OK);
     }
 
 }
