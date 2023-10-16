@@ -1,6 +1,7 @@
 package com.gamedoora.backend.studioservices.api;
 
 import com.gamedoora.backend.studioservices.assembler.StudioServicesAssembler;
+import com.gamedoora.backend.studioservices.exceptions.BadRequestException;
 import com.gamedoora.backend.studioservices.exceptions.NotFoundException;
 import com.gamedoora.model.dao.Studios;
 import com.gamedoora.model.dao.Users;
@@ -10,15 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.text.MessageFormat;
 import java.util.List;
@@ -112,4 +105,28 @@ public class StudioServicesController extends BaseController{
     public ResponseEntity<List<StudiosDTO>> getAllStudiosByUsersFirstName(@RequestParam(required = false) String user_name) {
         return createResponse(studioServicesAssembler.getAllStudiosByUsersFirstName(user_name), HttpStatus.OK);
     }
+
+    // Cre
+    @GetMapping(
+            value = "studio/users/{lastName}",
+            produces = {MediaType.APPLICATION_JSON_VALUE})
+    public ResponseEntity<List<StudiosDTO>> getAllStudiosByUsersLastName(@RequestParam(required = false) String user_lastName){
+        if (user_lastName == null || user_lastName.isEmpty()) {
+            throw new BadRequestException("User last name is required.");
+        }
+        return createResponse(studioServicesAssembler.getAllStudiosByUsersLastName(user_lastName), HttpStatus.OK);
+    }
+
+    @GetMapping(
+            value = "studio/users/{phoneNumber}",
+            produces = {MediaType.APPLICATION_JSON_VALUE})
+    public ResponseEntity<List<StudiosDTO>> getAllStudiosByUsersPhoneNumber(@RequestParam(required = false) String userPhoneNumber){
+        if (userPhoneNumber == null || userPhoneNumber.isEmpty())
+        {
+            throw new BadRequestException("User phone number is required");
+        }
+        return createResponse(studioServicesAssembler.getAllStudiosByPhoneNumber(userPhoneNumber), HttpStatus.OK);
+    }
+
+
 }
